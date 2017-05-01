@@ -14,5 +14,4 @@ class MyService(Service):
 		print(self.hello('world'))
 
 
-config.load('example/myservice.conf')
-MyService(config).hello_world()
+MyService(config.Config('example/myservice.conf')).hello_world()

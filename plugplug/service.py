@@ -11,14 +11,14 @@ class Service:
 	def __init__(self, name, config):
 		self.name = name
 		self.config = config
-		self._logger = logging.getLogger(name=self.config.logger_name)
+		self._logger = logging.getLogger(name=self.config.get('logger_name'))
 		self._debug = self._logger.debug
 		self._info = self._logger.info
 		self._warn = self._logger.warn
 		self._error = self._logger.error
 
 	def load_plugin(self, plugin_name):
-		path = os.path.join(self.config.plugin_directory, '%s.py' % plugin_name)
+		path = os.path.join(self.config.get('plugin_directory'), '%s.py' % plugin_name)
 		if os.path.exists(path):
 			mod = imp.load_source(plugin_name, path)
 			self._debug('Imported plugin "%s"', plugin_name)
